@@ -13,6 +13,7 @@ import {
   Image,
 } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   container: {
@@ -75,8 +76,29 @@ export default function App() {
     />
   );
   const EmptyState = () => (
-    <View>
-      <Text>Empty state</Text>
+    <View style={{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+    }}>
+      <MaterialCommunityIcons
+        name="image-search-outline"
+        size={120}
+        color="#808080"
+        style={{ marginBottom: 16 }}
+      />
+      <Text style={{
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 16,
+      }}>
+        Opps! No images to display.
+      </Text>
+      <Button
+        title={"Show images"}
+        onPress={showImagesHandler}
+      />
     </View>
   );
 
@@ -86,20 +108,10 @@ export default function App() {
         <Text style={[styles.welcome]}>
           Welcome to Photos App
         </Text>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ marginRight: 8 }}>
-            <Button
-              title={"Show alert"}
-              onPress={showAlertHandler}
-            />
-          </View>
-          <View>
-            <Button
-              title={"Show images"}
-              onPress={showImagesHandler}
-            />
-          </View>
-        </View>
+        <Button
+          title={"Show alert"}
+          onPress={showAlertHandler}
+        />
       </View>
       {photos.length === 0 ? <EmptyState/> : <PhotoGallery/>}
       <StatusBar style="auto" />
