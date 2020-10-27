@@ -104,7 +104,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <View style={{ padding: 16 }}>
+      <View style={{
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
+      }}>
         <Text style={[styles.welcome]}>
           Welcome to Photos App
         </Text>
