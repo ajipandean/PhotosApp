@@ -41,16 +41,22 @@ export default function App() {
     );
   };
   const showImagesHandler = async () => {
-    const { granted } = await MediaLib.requestPermissionsAsync();
-    if(granted) {
-      const media = await MediaLib.getAssetsAsync();
-      const slicedImage = media.assets.slice(0, 10);
-      setPhotos(slicedImage);
-    } else {
+    try {
+      const { granted } = await MediaLib.requestPermissionsAsync();
+      if(granted) {
+        const media = await MediaLib.getAssetsAsync();
+        const slicedImage = media.assets.slice(0, 10);
+        setPhotos(slicedImage);
+      } else {
+        throw new Error('You are not allowed to access gallery.')
+      }
+    } catch (error) {
       Alert.alert(
-        'Not Allowed',
-        'This app does not allowed to see the your photos.',
-        [],
+        'Error occurred',
+        error.message,
+        [
+          { text: 'Close' },
+        ],
         { cancelable: true },
       );
     }
